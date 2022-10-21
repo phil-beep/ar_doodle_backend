@@ -1,7 +1,7 @@
 import schemas
 from PIL import Image, ImageDraw
 
-canvas_size = 500
+canvas_size = 256
 img = Image.new("RGB", (canvas_size, canvas_size), "white")
 draw = ImageDraw.Draw(img)
 
