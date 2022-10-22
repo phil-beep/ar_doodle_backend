@@ -13,7 +13,8 @@ https://pip.pypa.io/en/stable/installation/
 
 We will use Anaconda for this installation.
 
-Select and download the latest Miniforge3 installer for your OS: 
+Select and download the latest Miniforge3 installer for your OS:
+
 https://github.com/conda-forge/miniforge/releases/tag/4.14.0-0
 
 Create the environment:
@@ -41,6 +42,10 @@ For Apple users:
 ---
 
 #### 4. Install and launch Docker
+
+Download Docker:
+
+https://docs.docker.com/get-docker/
 
 `$ docker pull tensorflow/tensorflow:latest`
 
