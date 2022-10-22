@@ -73,7 +73,7 @@ Make sure you adjust the **n_classes** variable to the total number of model cla
 
 Download the models:
 
-`$ python get_models.py`
+`$ python get_dataset.py`
 
 
 Train and save the model:
