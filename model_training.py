@@ -1,9 +1,6 @@
+from globals import *
 import datetime, os
-import tensorflow as tf
-
-from pathlib import Path
 from matplotlib import pyplot as plt
-from quickdraw import QuickDrawDataGroup, QuickDrawData
 
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential
@@ -13,27 +10,6 @@ from tensorflow.keras.layers.experimental.preprocessing import Rescaling
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D, Dropout, BatchNormalization
 from tensorflow.keras.callbacks import TensorBoard
 
-
-image_size = (28, 28)
-batch_size = 32
-input_shape = (28, 28, 1)
-n_classes = 345
-epochs = 14
-
-
-def generate_class_images(name, max_drawings, recognized):
-    directory = Path("dataset/" + name)
-
-    if not directory.exists():
-        directory.mkdir(parents=True)
-
-    images = QuickDrawDataGroup(name, max_drawings=max_drawings, recognized=recognized)
-    for img in images.drawings:
-        filename = directory.as_posix() + "/" + str(img.key_id) + ".png"
-        img.get_image(stroke_width=3).resize(image_size).save(filename)
-
-    for label in QuickDrawData().drawing_names:
-        generate_class_images(label, max_drawings=1200, recognized=True)
 
 train_ds = image_dataset_from_directory(
     "dataset",
@@ -111,10 +87,16 @@ model.fit(
 )
 
 version = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-def increment_version():
-    f = open("./models/current_version.txt", "r")
-    version = f.read()
-    f = open("./models/current_version.txt", "w")
-    version = './models/model_' + version
-    f.write(version)
+
+def save_model():
+    increment_version()
     model.save('./models/model_' + version)
+
+
+def increment_version():
+    f = open("./models/current_version.txt", "w")
+    v = 'model_' + version
+    f.write(v)
+    f.close()
+
+save_model()
