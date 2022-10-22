@@ -43,6 +43,7 @@ For Apple users:
 #### 4. Install and launch Docker
 
 `$ docker pull tensorflow/tensorflow:latest`
+
 `$ docker run -it -p 8888:8888 tensorflow/tensorflow:latest-jupyter`
 
 ---
