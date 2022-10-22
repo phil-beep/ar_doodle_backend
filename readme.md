@@ -65,7 +65,18 @@ After the installation has finished, let Poetry automatically install all the re
 
 ---
 
-#### 6. Download the quickdraw dataset and train the model
+#### 6. Preparing the Model
+
+For this step you will need to write the quickdraw objects (fish, car, etc.) you want to train into the **labels.py** file. Make sure you put the objects in the same (alphabetical) order they appear in the official list.
+
+Make sure you adjust the **n_classes** variable to the total number of model classes used in the in the **globals.py** file. You can also adjust parameters as epochs and image resolution.
+
+Download the models:
+
+`$ python get_models.py`
+
+
+Train and save the model:
 
 `$ python model_training.py`
 
