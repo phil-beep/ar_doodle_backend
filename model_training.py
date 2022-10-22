@@ -110,4 +110,11 @@ model.fit(
     callbacks=[tensorboard_callback]
 )
 
-model.save('./models/model_' + datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
+version = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+def increment_version():
+    f = open("./models/current_version.txt", "r")
+    version = f.read()
+    f = open("./models/current_version.txt", "w")
+    version = './models/model_' + version
+    f.write(version)
+    model.save('./models/model_' + version)
