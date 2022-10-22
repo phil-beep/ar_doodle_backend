@@ -12,8 +12,9 @@ def draw_image(drawing_container: schemas.Drawing):
 
     #change function later depending on how drawing works in frontend
     render_stop_while_drawing(strokes)
-
-    img.show()
+    #img.show()
+    resized = img.resize(size=(28, 28))
+    return resized;
 
 def render_stop_while_drawing(strokes):
 
