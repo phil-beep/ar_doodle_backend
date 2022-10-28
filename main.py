@@ -17,7 +17,7 @@ def identify_drawing(drawing_coordinates: schemas.Drawing):
 def identify_picture(animal, image_name):
     model = load_model()
     
-    img = Image.open("dataset/" + animal + "/" + image_name + ".png")
+    img = Image.open("dataset/" + animal + "/" + image_name + ".png").convert('L')
     img.show()
     tensor_img = img_to_array(img)
     tensor_img = tf.expand_dims(tensor_img, 0)
