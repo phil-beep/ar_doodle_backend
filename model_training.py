@@ -1,6 +1,7 @@
 from globals import *
 import datetime, os
 from matplotlib import pyplot as plt
+import random
 
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential
@@ -13,7 +14,7 @@ from tensorflow.keras.callbacks import TensorBoard
 
 train_ds = image_dataset_from_directory(
     "dataset",
-    validation_split=0.2,
+    validation_split=validation_split,
     subset="training",
     seed=123,
     color_mode="grayscale",
@@ -23,7 +24,7 @@ train_ds = image_dataset_from_directory(
 
 val_ds = image_dataset_from_directory(
     "dataset",
-    validation_split=0.2,
+    validation_split=validation_split,
     subset="validation",
     seed=123,
     color_mode="grayscale",
@@ -31,15 +32,7 @@ val_ds = image_dataset_from_directory(
     batch_size=batch_size
 )
 
-plt.figure(figsize=(8, 8))
-for images, labels in train_ds.take(1):
-    for i in range(9):
-        ax = plt.subplot(3, 3, i + 1)
-        data = images[i].numpy().astype("uint8")
-        plt.imshow(data, cmap='gray', vmin=0, vmax=255)
-        plt.title(train_ds.class_names[labels[i]])
-        plt.axis("off")
-
+#configuring the network
 model = Sequential([
     Rescaling(1. / 255, input_shape=input_shape),
     BatchNormalization(),
@@ -74,16 +67,12 @@ model.compile(
 
 model.summary()
 
-logdir = os.path.join("logs", datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
-tensorboard_callback = TensorBoard(logdir, histogram_freq=1)
-
-
+#training the model
 model.fit(
     train_ds,
     validation_data=val_ds,
     epochs=epochs,
-    verbose=1,
-    callbacks=[tensorboard_callback]
+    verbose=1
 )
 
 version = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
