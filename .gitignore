@@ -10,6 +10,7 @@ dataset/*
 
 #custom
 logs/
+models/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
