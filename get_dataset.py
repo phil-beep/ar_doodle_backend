@@ -18,5 +18,4 @@ def generate_class_images(name, max_drawings, recognized):
 
 
 for label in labels.labels:
-    print(label)
     generate_class_images(label, max_drawings, recognized=True)
