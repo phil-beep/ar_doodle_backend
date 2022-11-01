@@ -3,7 +3,7 @@ from fastapi import FastAPI
 import schemas
 from PIL import Image
 from keras_preps import *
-
+from globals import image_size
 app = FastAPI()
 
 @app.get("/identify_drawing/")
@@ -28,6 +28,11 @@ def identify_picture(animal, image_name):
 @app.post("/file_path/")
 def image_from_file_path(file_path: schemas.File_path):
     
-    img = Image.open(file_path.imageLocation)
+    img = Image.open(file_path.imageLocation).convert('L')
+    img = img.resize(size = image_size)
     model = load_model()
-    return analysis(img, model)
+    img.show()
+    tensor_img = img_to_array(img)
+    tensor_img = tf.expand_dims(tensor_img, 0)
+    tensor_img /= 255
+    return analysis(tensor_img, model)
