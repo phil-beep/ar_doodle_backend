@@ -28,6 +28,6 @@ def identify_picture(animal, image_name):
 @app.post("/file_path/")
 def image_from_file_path(file_path: schemas.File_path):
     
-    img = Image.open(file_path)
+    img = Image.open(file_path.imageLocation)
     model = load_model()
     return analysis(img, model)
