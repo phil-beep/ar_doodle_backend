@@ -1,15 +1,15 @@
-import string
 from fastapi import FastAPI
 import schemas
 from PIL import Image
-from keras_preps import *
+from keras_preps import load_model, preprocess_drawing, analysis
+from drawing_tool import draw_image_from_coordinates
 
 app = FastAPI()
 model = load_model()
 
 @app.get("/identify_drawing/")
 def identify_drawing(drawing_coordinates: schemas.Drawing):
-    img = drawing_tool.draw_image_from_coordinates(drawing_coordinates)
+    img = draw_image_from_coordinates(drawing_coordinates)
     tensor_img = preprocess_drawing(img)
     return analysis(tensor_img, model)
 

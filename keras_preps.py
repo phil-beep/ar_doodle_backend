@@ -3,7 +3,6 @@ from tensorflow.keras.utils import img_to_array
 import tensorflow as tf
 import numpy as np
 import labels
-import drawing_tool
 from globals import input_size, image_size
 
 def load_model():
