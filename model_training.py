@@ -67,15 +67,18 @@ model.compile(
 
 model.summary()
 
+version = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir = os.path.join("logs",version)
+tensorboard = TensorBoard(logdir,  histogram_freq=1)
+
 #training the model
 model.fit(
     train_ds,
     validation_data=val_ds,
     epochs=epochs,
-    verbose=1
+    verbose=1,
+    callbacks = [tensorboard]
 )
-
-version = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 
 def save_model():
     increment_version()
