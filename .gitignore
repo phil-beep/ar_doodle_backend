@@ -3,6 +3,7 @@
 
 #tf models and data
 dataset/*
+test_data/*
 .quickdrawcache/*
 
 #IDEs
