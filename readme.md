@@ -53,15 +53,11 @@ https://docs.docker.com/get-docker/
 
 ---
 
-#### 5. Install Poetry
+#### 5. Installing the dependencies
 
-First,  you will need to install the dependency manager Poetry:
+To run the project, you will need to install all the additional dependencies using pip:
 
-`$ pip install poetry`
-
-After the installation has finished, let Poetry automatically install all the required dependencies of the project:
-
-`$ poetry install`
+`$ pip install -r requirements.txt`
 
 ---
 
