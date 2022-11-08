@@ -5,5 +5,6 @@ labels = [
     "dolphin",
     "fish",
     "octopus",
+    "shark",
     "whale"
 ]
