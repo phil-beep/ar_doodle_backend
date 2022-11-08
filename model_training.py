@@ -7,9 +7,9 @@ from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.losses import SparseCategoricalCrossentropy
 from tensorflow.keras.metrics import sparse_categorical_accuracy
-from tensorflow.keras.layers.experimental.preprocessing import Rescaling
+from tensorflow.keras.layers.experimental.preprocessing import Rescaling, RandomFlip, RandomRotation, RandomWidth, RandomHeight
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D, Dropout, BatchNormalization
-from tensorflow.keras.callbacks import TensorBoard
+from tensorflow.keras.callbacks import TensorBoard, EarlyStopping
 
 
 train_ds = image_dataset_from_directory(
@@ -67,9 +67,10 @@ model.compile(
 
 model.summary()
 
-version = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+version = str(epochs) + "_" + str(max_drawings) + "_" + str(validation_split) + "_" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 logdir = os.path.join("logs",version)
 tensorboard = TensorBoard(logdir,  histogram_freq=1)
+callbacks = EarlyStopping(restore_best_weights=True)
 
 #training the model
 model.fit(
@@ -77,7 +78,7 @@ model.fit(
     validation_data=val_ds,
     epochs=epochs,
     verbose=1,
-    callbacks = [tensorboard]
+    callbacks = [tensorboard, callbacks]
 )
 
 def save_model():
