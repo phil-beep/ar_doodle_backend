@@ -5,6 +5,7 @@
 dataset/*
 test_data/*
 .quickdrawcache/*
+temp/*
 
 #IDEs
 .vscode/

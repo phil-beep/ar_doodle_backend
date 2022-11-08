@@ -17,20 +17,20 @@ def identify_drawing(drawing_coordinates: schemas.Drawing):
 #debug route to load any image from the dataset
 @app.get("/training_data/{animal}/{image_name}")
 def identify_picture(animal, image_name):
-    img = Image.open("dataset/" + animal + "/" + image_name + ".png").convert('L')
+    img = Image.open("dataset/" + animal + "/" + image_name + ".png")
     tensor_img = preprocess_drawing(img)
     return analysis(tensor_img, model)
 
 
 @app.get("/test_data/{image_name}")
 def identify_picture(image_name):
-    img = Image.open("test_data/" + image_name + ".png").convert('L')
+    img = Image.open("test_data/" + image_name + ".png")
     tensor_img = preprocess_drawing(img)
     return analysis(tensor_img, model)
 
 
 @app.post("/file_path/")
 def image_from_file_path(file_path: schemas.File_path):
-    img = Image.open(file_path.imageLocation).convert('L')
+    img = Image.open(file_path.imageLocation)
     tensor_img = preprocess_drawing(img)
     return analysis(tensor_img, model)
