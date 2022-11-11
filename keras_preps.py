@@ -35,9 +35,7 @@ def preprocess_drawing(img):
 
 def analysis(tensor_img, model):
     predictions = model.predict(tensor_img)
-    #print(predictions)
     classes = np.argmax(predictions[0])
-    #print(classes)
     result = labels.labels[classes]
     return(result)
 
@@ -75,6 +73,5 @@ def bounding_box(contours):
     cv2.rectangle(img_contours, (min_x, min_y), (max_w, max_h), (0,255,0), 2)
         
     cv2.imwrite("temp/" + __uuid__ + "/contours.png", img_contours)
-    #print("x: " + str(min_x) + " y: " + str(min_y) + " w: " + str(max_w))
     return min_x , min_y, max_w
 
