@@ -1,6 +1,7 @@
 from keras_preps import load_model, preprocess_drawing, analysis
 from main import identify_picture
 from PIL import Image
+from globals import canvas_size
 
 def testing():
     model = load_model()
@@ -20,10 +21,9 @@ def testing():
     print(result)
     
 
-
-
 def testing_with(image_name, model):
     img = Image.open("test_data/" + image_name + ".png")
+    img = img.resize(size=(canvas_size,canvas_size))
     tensor_img = preprocess_drawing(img)
     return analysis(tensor_img, model)
 
