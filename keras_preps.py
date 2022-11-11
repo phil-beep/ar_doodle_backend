@@ -17,14 +17,9 @@ def load_model():
     print("model ready")
     return model
 
-def preprocess_drawing(img_temp):
+def preprocess_drawing(img):
     global __uuid__
     __uuid__ = str(uuid.uuid1())
-   
-    img = Image.new("RGBA", img_temp.size, "WHITE") # Create a white rgba background
-    img.paste(img_temp, (0, 0), img_temp)
-    img.convert('RGB')
-
     os.mkdir("temp/" + __uuid__)
     img_path = "temp/" + __uuid__ + "/original.png"
     img.save(img_path)
