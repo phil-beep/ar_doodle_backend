@@ -20,6 +20,9 @@ def load_model():
 def preprocess_drawing(img):
     global __uuid__
     __uuid__ = str(uuid.uuid1())
+    if not os.path.exists("temp"):
+        os.makedirs("temp")
+
     os.mkdir("temp/" + __uuid__)
     img_path = "temp/" + __uuid__ + "/original.png"
     img.save(img_path)

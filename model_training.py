@@ -68,6 +68,10 @@ model.compile(
 model.summary()
 
 version = str(epochs) + "_" + str(max_drawings) + "_" + str(validation_split) + "_" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+
+if not os.path.exists("logs"):
+        os.makedirs("logs")
+
 logdir = os.path.join("logs",version)
 tensorboard = TensorBoard(logdir,  histogram_freq=1)
 callbacks = EarlyStopping(restore_best_weights=True)
