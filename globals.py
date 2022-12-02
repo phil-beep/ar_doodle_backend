@@ -9,3 +9,4 @@ epochs = 20
 max_drawings = 50000
 validation_split = 0.2
 canvas_size = 128
+__uuid__ = ""
