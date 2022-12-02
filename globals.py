@@ -1,6 +1,6 @@
 from labels import labels
 
-input_size = 32
+input_size = 128
 image_size = (input_size, input_size)
 batch_size = 64
 input_shape = (input_size, input_size, 1)
