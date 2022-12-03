@@ -1,8 +1,10 @@
 .venv
 .vscode
+.git
+.DS_Store
 __pycache__
 .quickdrawcache
-dataset/*
-test_data/*
-.quickdrawcache/*
-temp/*
+dataset/
+logs/
+test_data/
+temp/
