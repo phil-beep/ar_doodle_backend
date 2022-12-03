@@ -9,9 +9,7 @@ import uuid
 import os
 
 def load_model():
-    f = open('./models/current_version.txt')
-    model_used = f.read()
-    model = tf.keras.models.load_model('./models/' + model_used )
+    model = tf.keras.models.load_model('./model/')
     model.predict(tf.zeros([1, input_size, input_size , 1]))
     print("model ready")
     return model
