@@ -37,6 +37,7 @@ def analysis(tensor_img, model):
     predictions = model.predict(tensor_img)
     classes = np.argmax(predictions[0])
     result = labels.labels[classes]
+    print(result)
     return(result)
 
 
