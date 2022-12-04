@@ -1,8 +1,10 @@
 FROM python:3.9
 
+RUN python3 -m venv venv
+
 COPY ./requirements.txt /requirements.txt
 
-RUN pip install --no-cache-dir --upgrade -r /requirements.txt
+RUN . /venv/bin/activate && pip install --no-cache-dir -r /requirements.txt
 
 COPY ./* /
 
