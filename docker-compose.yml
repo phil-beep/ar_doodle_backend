@@ -5,7 +5,7 @@ services:
   api:
     build: .
     restart: always
-    command: gunicorn main:app --bind 0.0.0.0:8000
+    command: "gunicorn main:app --bind 0.0.0.0:8000"
     expose:
       - "8000"
     labels:
@@ -17,6 +17,7 @@ services:
     ports:
       - "443:443"
       - "80:80"
+      - "8080:8080"
     restart: always
     command:
       - "--api.insecure=true"
