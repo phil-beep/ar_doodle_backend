@@ -8,8 +8,9 @@ services:
       - "80"
     labels:
       - "traefik.enable=true"
-      #- "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
-      - "traefik.port=80"
+      - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
+
 
   traefik:
     image: traefik:v2.2
