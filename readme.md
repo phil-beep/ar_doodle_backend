@@ -11,19 +11,13 @@ https://pip.pypa.io/en/stable/installation/
 
 #### 2. Install and activate a virtual environment
 
-We will use Anaconda for this installation.
-
-Select and download the latest Miniforge3 installer for your OS:
-
-https://github.com/conda-forge/miniforge/releases/tag/4.14.0-0
-
 Create the environment:
 
-`$ conda create --name tf`
+`$ python3 -m venv venv`
 
 Start the environment and make sure it stays active while developing!
 
-`$ conda activate tf`
+`$ source venv/bin/activate`
 
 ---
 
@@ -41,19 +35,7 @@ For Apple users:
 
 ---
 
-#### 4. Install and launch Docker
-
-Download Docker:
-
-https://docs.docker.com/get-docker/
-
-`$ docker pull tensorflow/tensorflow:latest`
-
-`$ docker run -it -p 8888:8888 tensorflow/tensorflow:latest-jupyter`
-
----
-
-#### 5. Installing the dependencies
+#### 4. Installing the dependencies
 
 To run the project, you will need to install all the additional dependencies using pip:
 
@@ -61,7 +43,7 @@ To run the project, you will need to install all the additional dependencies usi
 
 ---
 
-#### 6. Preparing the Model
+#### 5. Preparing the Model
 
 For this step you will need to write the quickdraw objects (fish, car, etc.) you want to train into the **labels.py** file. Make sure you put the objects in the same (alphabetical) order they appear in the official list.
 
@@ -78,5 +60,5 @@ Train and save the model:
 
 ---
 
-#### 7. Launch the server!
+#### 6. Launch the server!
 `$ uvicorn main:app --reload`
