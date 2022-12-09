@@ -3,12 +3,12 @@ version: '3.8'
 services:
   web:
     build: .
-    command: "uvicorn main:app --host 0.0.0.0"
+    #command: "uvicorn main:app --host 0.0.0.0"
     expose:
       - 8000
     labels:
       - "traefik.enable=true"
-      #- "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
+      - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
 
   traefik:
     image: traefik:v2.2
