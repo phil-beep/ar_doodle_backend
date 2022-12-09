@@ -31,7 +31,9 @@ services:
       - "certificatesResolvers.letsencrypt.acme.httpChallenge.entryPoint=web"
 
     volumes:
-      - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "traefik-public-certificates:/certificates"
 
+volumes:
+  traefik-public-certificates:
 
