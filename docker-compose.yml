@@ -4,9 +4,9 @@ services:
   web:
     build: .
     expose:
-      - "80"
+      - "8000"
     ports:
-      - "80:80"
+      - "80:8000"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
