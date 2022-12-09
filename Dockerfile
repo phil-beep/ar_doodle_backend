@@ -1,11 +1,7 @@
-FROM python:3.9
+FROM tiangolo/uvicorn-gunicorn:python3.8-slim
 
 COPY ./requirements.txt /requirements.txt
 
 RUN pip install --no-cache-dir -r /requirements.txt
 
-COPY ./* /
-
-COPY ./model/ ./model/
-
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+COPY . .
