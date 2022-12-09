@@ -4,7 +4,8 @@ services:
   web:
     build: .
     #command: "uvicorn main:app --host 0.0.0.0"
-
+    expose:
+      - "80"
     labels:
       - "traefik.enable=true"
       #- "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
