@@ -3,16 +3,11 @@ version: '3.8'
 services:
   web:
     build: .
-    #command: "uvicorn main:app --host 0.0.0.0"
     expose:
       - "80"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
-      - "traefik.http.routers.frontend.entrypoints=web"
-    networks:
-      - "demo-net"
-
 
   traefik:
     image: traefik:v2.2
@@ -21,9 +16,4 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./services/traefik/traefik.dev.toml:/etc/traefik/traefik.toml"
-    networks:
-      - "demo-net"
-
-networks:
-  demo-net:
+      - "$PWD/services/traefik/traefik.dev.toml:/etc/traefik/traefik.toml"
