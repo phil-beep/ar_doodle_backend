@@ -16,6 +16,9 @@ services:
       #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
       - "--certificatesresolvers.myresolver.acme.email=philipp@handke.dev"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    networks:
+      - "traefik_proxy"
+      - "default"
     ports:
       - "443:443"
       - "80:80"
@@ -27,5 +30,13 @@ services:
     container_name: "api"
     build: ./
     restart: always
-    ports:
-      - "443:80"
+    labels:
+      - "traefik.backend=backend"
+      - "traefik.enable=true"
+      - "traefik.port=80"
+      - "traefik.docker.network=traefik_proxy"
+
+networks:
+  traefik_proxy:
+    external:
+      name: "traefik_proxy"
