@@ -2,14 +2,15 @@ version: "3"
 
 services:
 
-  fastapi:
+  api:
     build: .
     restart: always
+    command: gunicorn main:app --bind 0.0.0.0:8000
+    expose:
+      - "8000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.fastapi.rule=Host(`doodleaquarium.com`)"
-      - "traefik.http.routers.fastapi.tls=true"
-      - "traefik.http.routers.fastapi.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
 
   traefik:
     image: "traefik:v2.9"
