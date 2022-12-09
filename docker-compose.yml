@@ -1,10 +1,22 @@
-version: "3.3"
+version: "3"
 
 services:
 
+  api:
+    build: .
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fastapi.rule=Host(`doodleaquarium.com`)"
+      - "traefik.http.routers.fastapi.tls=true"
+      - "traefik.http.routers.fastapi.tls.certresolver=letsencrypt"
+
   traefik:
     image: "traefik:v2.9"
-    container_name: "traefik"
+    ports:
+      - "443:443"
+      - "80:80"
+    restart: always
     command:
       - "--api.insecure=true"
       - "--providers.docker=true"
@@ -16,21 +28,10 @@ services:
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       - "--certificatesresolvers.myresolver.acme.email=philipp@handke.dev"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-    ports:
-      - "443:443"
-      - "80:80"
+      - "certificatesResolvers.letsencrypt.acme.httpChallenge.entryPoint=web"
+
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
-  api:
-    build: .
-    command: "uvicorn main:app --host 0.0.0.0"
-    ports: 
-      - "80:8000"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.fastapi.rule=Host(`doodleaquarium.com`)"
-      - "traefik.http.routers.fastapi.tls=true"
-      - "traefik.http.routers.fastapi.tls.certresolver=letsencrypt"
 
