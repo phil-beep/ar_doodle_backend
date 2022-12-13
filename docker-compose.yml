@@ -24,6 +24,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   backend:
+    build: .
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`api.explor-ar.de`)"
