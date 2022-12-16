@@ -1,4 +1,4 @@
-FROM tiangolo/tiangolo/uvicorn-gunicorn:3.8-slim
+FROM tiangolo/uvicorn-gunicorn:3.8-slim
 
 COPY ./requirements.txt /requirements.txt
 
